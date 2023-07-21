@@ -292,6 +292,13 @@
             map: map,
           });
 
+          google.maps.event.addListener(map, "click", function (e) {
+            if (infowindow) {
+              infowindow.close();
+            }
+            $(".btn-list").removeClass("selected");
+          });
+
           marker.addListener("click", function () {
             map.setZoom(15);
             map.panTo(feature.position);
