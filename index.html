@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marker List Google Maps API</title>
+    <style>
+      .container {
+        box-sizing: border-box;
+        color: #555;
+        float: left;
+        font: normal 14px/1.4 Arial, Helvetica, sans-serif;
+        padding: 0 15px;
+        width: 100%;
+      }
+
+      .container .map-container {
+        clear: left;
+        float: left;
+        margin-top: 27px;
+        width: 100%;
+      }
+
+      .container > * {
+        box-sizing: content-box !important;
+      }
+
+      @media (min-width: 1024px) {
+        .container .map {
+          width: 70% !important;
+        }
+      }
+
+      .container .map {
+        /* float: left; */
+        height: 90vh;
+        width: 100%;
+      }
+
+      @media (min-width: 1024px) {
+        .container .loc-list {
+          width: 30% !important;
+        }
+      }
+
+      .container .loc-list {
+        float: left;
+        font-size: 13px;
+        height: 90vh;
+        overflow-x: auto;
+        width: 100%;
+      }
+
+      .container .loc-list ul {
+        display: block;
+        clear: left;
+        float: left;
+        width: 100%;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container .loc-list ul li {
+        border: 1px solid #eaeded;
+        box-sizing: border-box;
+        clear: left;
+        cursor: pointer;
+        display: block;
+        float: left;
+        width: 100%;
+      }
+
+      .btn-list.selected,
+      .container .loc-list ul li:hover {
+        background-color: #d2dbef;
+      }
+
+      .container .loc-list .list-details {
+        float: left;
+        margin-left: 6px;
+        width: 80%;
+      }
+
+      .container .loc-list .list-details .list-content {
+        padding: 10px;
+      }
+
+      .loc-nama {
+        font-size: 20px;
+        margin-bottom: 5px;
+      }
+    </style>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="map-container" class="map-container">
+        <div class="loc-list">
+          <ul class="list">
+            <li id="btn-list0" class="btn-list" onclick="clickList(0);">
+              <div class="list-details">
+                <div class="list-content">
+                  <div class="loc-nama">
+                    <b>Test</b>
+                  </div>
+                  <div class="loc-kordinat">
+                    <b>Kordinat</b> : -xxxxxxx, -xxxxxxx
+                  </div>
+                  <div class="loc-wilayah">
+                    <b>Wilayah kerja</b> : xxxxxxxxxx
+                  </div>
+                  <div class="loc-status"><b>Status</b> : Ilegal</div>
+                  <div class="loc-alat">
+                    <b>Jumlah alat pendukung</b> : Bulldoser
+                  </div>
+                  <div class="loc-klasifikasi">
+                    <b>Klasifikasi tambang</b> : Ti Rajuk
+                  </div>
+                  <div class="loc-produksi">
+                    <b>Produksi harian</b> : 10 Ton
+                  </div>
+                  <div class="loc-koordinator"><b>Koordinator</b> : xxxx</div>
+                  <div class="loc-penadah">
+                    <b>Afiliasi penadah</b> : Pengepul
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li id="btn-list1" class="btn-list" onclick="clickList(1);">
+              <div class="list-details">
+                <div class="list-content">
+                  <div class="loc-nama">
+                    <b>Test 2</b>
+                  </div>
+                  <div class="loc-kordinat">
+                    <b>Kordinat</b> : -xxxxxxx, -xxxxxxx
+                  </div>
+                  <div class="loc-wilayah">
+                    <b>Wilayah kerja</b> : xxxxxxxxxx
+                  </div>
+                  <div class="loc-status"><b>Status</b> : Ilegal</div>
+                  <div class="loc-alat">
+                    <b>Jumlah alat pendukung</b> : Bulldoser
+                  </div>
+                  <div class="loc-klasifikasi">
+                    <b>Klasifikasi tambang</b> : Ti Sebu
+                  </div>
+                  <div class="loc-produksi">
+                    <b>Produksi harian</b> : 20 Ton
+                  </div>
+                  <div class="loc-koordinator"><b>Koordinator</b> : xxxx</div>
+                  <div class="loc-penadah">
+                    <b>Afiliasi penadah</b> : Pengepul
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li id="btn-list2" class="btn-list" onclick="clickList(2);">
+              <div class="list-details">
+                <div class="list-content">
+                  <div class="loc-nama">
+                    <b>Test 3</b>
+                  </div>
+                  <div class="loc-kordinat">
+                    <b>Kordinat</b> : -xxxxxxx, -xxxxxxx
+                  </div>
+                  <div class="loc-wilayah">
+                    <b>Wilayah kerja</b> : xxxxxxxxxx
+                  </div>
+                  <div class="loc-status"><b>Status</b> : Ilegal</div>
+                  <div class="loc-alat">
+                    <b>Jumlah alat pendukung</b> : PC Besar
+                  </div>
+                  <div class="loc-klasifikasi">
+                    <b>Klasifikasi tambang</b> : TPID
+                  </div>
+                  <div class="loc-produksi"><b>Produksi harian</b> : 50 Kg</div>
+                  <div class="loc-koordinator"><b>Koordinator</b> : xxxx</div>
+                  <div class="loc-penadah">
+                    <b>Afiliasi penadah</b> : Kolektor
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li id="btn-list3" class="btn-list" onclick="clickList(3);">
+              <div class="list-details">
+                <div class="list-content">
+                  <div class="loc-nama">
+                    <b>Test 4</b>
+                  </div>
+                  <div class="loc-kordinat">
+                    <b>Kordinat</b> : -xxxxxxx, -xxxxxxx
+                  </div>
+                  <div class="loc-wilayah">
+                    <b>Wilayah kerja</b> : xxxxxxxxxx
+                  </div>
+                  <div class="loc-status"><b>Status</b> : Ilegal</div>
+                  <div class="loc-alat">
+                    <b>Jumlah alat pendukung</b> : PC Besar, Bulldoser
+                  </div>
+                  <div class="loc-klasifikasi">
+                    <b>Klasifikasi tambang</b> : TPID
+                  </div>
+                  <div class="loc-produksi">
+                    <b>Produksi harian</b> : 200 Kg
+                  </div>
+                  <div class="loc-koordinator"><b>Koordinator</b> : xxxx</div>
+                  <div class="loc-penadah">
+                    <b>Afiliasi penadah</b> : Smelter
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div id="map" class="map"></div>
+      </div>
+    </div>
+
+    <script>
+      var map;
+      var markers = [];
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 10,
+          center: new google.maps.LatLng(
+            -2.2603354969699265,
+            106.06491603566096
+          ),
+          mapTypeId: "roadmap",
+        });
+
+        var list = [
+          {
+            position: new google.maps.LatLng(
+              -2.120411782013124,
+              106.11256513326073
+            ),
+            name: "Test",
+            status: "Ilegal",
+            type: "xxxxxxxxxx",
+          },
+          {
+            position: new google.maps.LatLng(
+              -1.5490915492383588,
+              105.58239499425954
+            ),
+            name: "Test 2",
+            status: "Ilegal",
+            type: "xxxxxxxxxx",
+          },
+          {
+            position: new google.maps.LatLng(
+              -2.740363044157109,
+              107.61413804370069
+            ),
+            name: "Test 3",
+            status: "Ilegal",
+            type: "xxxxxxxxxx",
+          },
+          {
+            position: new google.maps.LatLng(
+              -2.112978479969686,
+              106.12729144797594
+            ),
+            name: "Test 4",
+            status: "Ilegal",
+            type: "xxxxxxxxxx",
+          },
+        ];
+
+        var infowindow = new google.maps.InfoWindow({
+          name: "",
+          status: "",
+          type: "",
+        });
+
+        list.forEach(function callback(feature, i) {
+          var marker = new google.maps.Marker({
+            position: feature.position,
+            name: feature.name,
+            status: feature.status,
+            type: feature.type,
+            map: map,
+          });
+
+          marker.addListener("click", function () {
+            map.setZoom(15);
+            map.panTo(feature.position);
+
+            $(".btn-list").removeClass("selected");
+
+            $("#btn-list" + i).addClass("selected");
+
+            // console.log(i);
+
+            infowindow.setContent(
+              "<div>" +
+                "<b style='font-size:18px;'>" +
+                marker.name +
+                "</b>" +
+                "<br>" +
+                "<span>" +
+                marker.type +
+                "</span>" +
+                "<br>" +
+                "<span>" +
+                marker.status +
+                "</span>" +
+                "</div>"
+            );
+
+            infowindow.open(map, marker);
+          });
+
+          markers.push(marker);
+        });
+      }
+
+      function clickList(id) {
+        google.maps.event.trigger(markers[id], "click");
+      }
+    </script>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=xxxxxxxxxxxxxxxxxxxxxxxx&callback=initMap"
+    ></script>
+  </body>
+</html>
