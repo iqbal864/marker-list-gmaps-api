@@ -5,102 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Marker List Google Maps API</title>
-    <style>
-      .container {
-        box-sizing: border-box;
-        color: #555;
-        float: left;
-        font: normal 14px/1.4 Arial, Helvetica, sans-serif;
-        padding: 0 15px;
-        width: 100%;
-      }
 
-      .container .map-container {
-        clear: left;
-        float: left;
-        margin-top: 27px;
-        width: 100%;
-      }
-
-      .container > * {
-        box-sizing: content-box !important;
-      }
-
-      @media (min-width: 1024px) {
-        .container .map {
-          width: 70% !important;
-        }
-      }
-
-      .container .map {
-        /* float: left; */
-        height: 90vh;
-        width: 100%;
-      }
-
-      @media (min-width: 1024px) {
-        .container .loc-list {
-          width: 30% !important;
-        }
-      }
-
-      .container .loc-list {
-        float: left;
-        font-size: 13px;
-        height: 90vh;
-        overflow-x: auto;
-        width: 100%;
-      }
-
-      .container .loc-list ul {
-        display: block;
-        clear: left;
-        float: left;
-        width: 100%;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      .container .loc-list ul li {
-        border: 1px solid #eaeded;
-        box-sizing: border-box;
-        clear: left;
-        cursor: pointer;
-        display: block;
-        float: left;
-        width: 100%;
-      }
-
-      .btn-list.selected,
-      .container .loc-list ul li:hover {
-        background-color: #d2dbef;
-      }
-
-      .container .loc-list .list-details {
-        float: left;
-        margin-left: 6px;
-        width: 80%;
-      }
-
-      .container .loc-list .list-details .list-content {
-        padding: 10px;
-      }
-
-      .loc-nama {
-        font-size: 20px;
-        margin-bottom: 5px;
-      }
-    </style>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
-      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://mreq.github.io/slick-lightbox/dist/slick-lightbox.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://mreq.github.io/slick-lightbox/gh-pages/bower_components/slick-carousel/slick/slick-theme.css"
+    />
+    <link rel="stylesheet" href="./assets/css/marker-list-gmaps-api.css" />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.slim.js"
+      integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-migrate-3.4.1.min.js"
+      integrity="sha256-UnTxHm+zKuDPLfufgEMnKGXDl6fEIjtM+n1Q6lL73ok="
+      crossorigin="anonymous"
     ></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <div id="map-container" class="map-container">
         <div class="loc-list">
           <ul class="list">
@@ -225,8 +176,8 @@
     </div>
 
     <script>
-      var map;
-      var markers = [];
+      let map;
+      let markers = [];
 
       function initMap() {
         map = new google.maps.Map(document.getElementById("map"), {
@@ -238,57 +189,78 @@
           mapTypeId: "roadmap",
         });
 
-        var list = [
+        let list = [
           {
-            position: new google.maps.LatLng(
-              -2.120411782013124,
-              106.11256513326073
-            ),
+            position: "-2.120411782013124,106.11256513326073",
             name: "Test",
             status: "Ilegal",
-            type: "xxxxxxxxxx",
+            wilayah: "xxxxxxxxxx",
+            jml_alat: "Bulldoser",
+            klasifikasi: "Ti Rajuk",
+            produksi: "10 Ton",
+            koordinator: "xxxx",
+            penadah: "Pengepul",
+            image: [
+              { path: "./assets/img/1.jpg" },
+              { path: "./assets/img/2.jpg" },
+              { path: "./assets/img/3.jpeg" },
+            ],
           },
           {
-            position: new google.maps.LatLng(
-              -1.5490915492383588,
-              105.58239499425954
-            ),
+            position: "-1.5490915492383588,105.58239499425954",
             name: "Test 2",
             status: "Ilegal",
-            type: "xxxxxxxxxx",
+            wilayah: "xxxxxxxxxx",
+            jml_alat: "Bulldoser",
+            klasifikasi: "Ti Sebu",
+            produksi: "20 Ton",
+            koordinator: "xxxx",
+            penadah: "Pengepul",
+            image: [
+              { path: "./assets/img/4.jpg" },
+              { path: "./assets/img/5.jpeg" },
+              { path: "./assets/img/6.jpg" },
+            ],
           },
           {
-            position: new google.maps.LatLng(
-              -2.740363044157109,
-              107.61413804370069
-            ),
+            position: "-2.740363044157109, 107.61413804370069",
             name: "Test 3",
             status: "Ilegal",
-            type: "xxxxxxxxxx",
+            wilayah: "xxxxxxxxxx",
+            jml_alat: "Pc Besar",
+            klasifikasi: "TPID",
+            produksi: "50 Kg",
+            koordinator: "xxxx",
+            penadah: "Kolektor",
+            image: [
+              { path: "./assets/img/7.jpg" },
+              { path: "./assets/img/8.JPG" },
+              { path: "./assets/img/9.jpg" },
+            ],
           },
           {
-            position: new google.maps.LatLng(
-              -2.112978479969686,
-              106.12729144797594
-            ),
+            position: " -2.112978479969686, 106.12729144797594",
             name: "Test 4",
             status: "Ilegal",
-            type: "xxxxxxxxxx",
+            wilayah: "xxxxxxxxxx",
+            jml_alat: "PC Besar, Bulldoser",
+            klasifikasi: "TPID",
+            produksi: "200 Kg",
+            koordinator: "xxxx",
+            penadah: "Smelter",
+            image: [
+              { path: "./assets/img/10.jpg" },
+              { path: "./assets/img/11.jpg" },
+              { path: "./assets/img/12.jpg" },
+            ],
           },
         ];
 
-        var infowindow = new google.maps.InfoWindow({
-          name: "",
-          status: "",
-          type: "",
-        });
+        let infowindow = new google.maps.InfoWindow();
 
-        list.forEach(function callback(feature, i) {
-          var marker = new google.maps.Marker({
-            position: feature.position,
-            name: feature.name,
-            status: feature.status,
-            type: feature.type,
+        list.forEach(function callback(list, i) {
+          let marker = new google.maps.Marker({
+            position: getLatLng(list.position),
             map: map,
           });
 
@@ -301,31 +273,121 @@
 
           marker.addListener("click", function () {
             map.setZoom(15);
-            map.panTo(feature.position);
+            map.panTo(getLatLng(list.position));
 
             $(".btn-list").removeClass("selected");
 
             $("#btn-list" + i).addClass("selected");
 
-            // console.log(i);
+            // console.log(list.position);
+
+            let image = [];
+            list.image.forEach(function (img) {
+              image +=
+                '<div class="crsl-image">' +
+                "<a href='" +
+                img.path +
+                "'>" +
+                '<img src="' +
+                img.path +
+                '" class="rounded">' +
+                "</a>" +
+                "</div>";
+            });
+
+            // console.log(image);
 
             infowindow.setContent(
               "<div>" +
-                "<b style='font-size:18px;'>" +
-                marker.name +
+                '<b style="font-size:18px; margin-bottom:100px;">' +
+                list.name +
                 "</b>" +
                 "<br>" +
-                "<span>" +
-                marker.type +
-                "</span>" +
-                "<br>" +
-                "<span>" +
-                marker.status +
-                "</span>" +
+                '<a href="http://www.google.com/maps/place/' +
+                list.position +
+                '" target="_blank" style="background-color: #d2dbef;" class="btn btn-sm rounded shadow my-2"><i class="fas fa-map-marker-alt"></i> Open in Maps</a>' +
+                // carousel
+                '<div id="crsl">' +
+                image +
+                "</div>" +
+                // penutup carousel
+                // ...
+                // tab menu
+                "<nav>" +
+                '<div class="nav nav-tabs" id="nav-tab" role="tablist">' +
+                '<button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Description</button>' +
+                '<button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Timeline</button>' +
+                "</div>" +
+                "</nav>" +
+                '<div class="tab-content" id="nav-tabContent">' +
+                // konten 1
+                '<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">' +
+                // isi konten tab 1
+                '<div class="list-group" style="height:150px; overflow:auto;">' +
+                '<a href="#" class="list-group-item list-group-item-action"><b>Wilayah</b> : ' +
+                list.wilayah +
+                "</a>" +
+                '<a href="#" class="list-group-item list-group-item-action"><b>Status</b> : ' +
+                list.status +
+                "</a>" +
+                '<a href="#" class="list-group-item list-group-item-action"><b>Jumlah Alat</b> :' +
+                list.jml_alat +
+                "</a>" +
+                '<a href="#" class="list-group-item list-group-item-action"><b>Klasifikasi</b> :' +
+                list.klasifikasi +
+                "</a>" +
+                '<a href="#" class="list-group-item list-group-item-action"><b>Produksi harian</b> :' +
+                list.produksi +
+                "</a>" +
+                '<a href="#" class="list-group-item list-group-item-action"><b>Koordinator</b> :' +
+                list.koordinator +
+                "</a>" +
+                '<a href="#" class="list-group-item list-group-item-action"><b>Penadah</b> :' +
+                list.penadah +
+                "</a>" +
+                "</div>" +
+                // penutup konten tab 1
+                "</div>" +
+                // penutup konten 1
+                // ...
+                // konten 2
+                '<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">' +
+                // isi konten tab 2
+
+                // penutup konten tab 2
+                "</div>" +
+                // penutup konten 2
+                "</div>" +
+                // penutup tab menu
+                "</div>" +
                 "</div>"
             );
 
             infowindow.open(map, marker);
+            google.maps.event.addListenerOnce(
+              infowindow,
+              "domready",
+              function () {
+                $("#crsl").slick({
+                  // dots: true,
+                  infinite: true,
+                  speed: 300,
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                  centerMode: false,
+                  variableWidth: true,
+                  prevArrow:
+                    '<button type="button" class="slick-custom-arrow slick-prev"></button>',
+                  nextArrow:
+                    '<button type="button" class="slick-custom-arrow slick-next"></button>',
+                });
+
+                $("#crsl").slickLightbox({
+                  itemSelector: "a",
+                  navigateByKeyboard: true,
+                });
+              }
+            );
           });
 
           markers.push(marker);
@@ -335,11 +397,24 @@
       function clickList(id) {
         google.maps.event.trigger(markers[id], "click");
       }
+
+      function getLatLng(position) {
+        let latlng = position.split(",");
+        return new google.maps.LatLng(
+          parseFloat(latlng[0]),
+          parseFloat(latlng[1])
+        );
+      }
     </script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
     <script
       async
       defer
       src="https://maps.googleapis.com/maps/api/js?key=xxxxxxxxxxxxxxxxxxxxxxxx&callback=initMap"
     ></script>
+    <script src="https://mreq.github.io/slick-lightbox/dist/slick-lightbox.js"></script>
   </body>
 </html>
